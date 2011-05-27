@@ -44,6 +44,8 @@ module Transitions
       case @on_transition
       when Symbol, String
         obj.send(@on_transition, *args)
+      when Array
+        @on_transition.each { |m| obj.send(m, *args) }
       when Proc
         @on_transition.call(obj, *args)
       end
