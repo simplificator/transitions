@@ -51,7 +51,14 @@ module Transitions
         end
 
         record.current_state(@name, new_state, persist)
-        record.send(@events[event].success) if @events[event].success
+        if @events[event].success
+          case @events[event].success
+          when Symbol, String
+            record.send(@events[event].success)
+          when Array
+            @events[event].success.each { |m| record.send(m) }
+          end
+        end
         true
       else
         if record.respond_to?(event_failed_callback)
