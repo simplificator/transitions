@@ -43,11 +43,17 @@ module Transitions
     def execute(obj, *args)
       case @on_transition
       when Symbol, String
-        obj.send(@on_transition, *args)
+        options[:pass_transition] ?
+          obj.send(@on_transition, self, *args) :
+          obj.send(@on_transition, *args)
       when Array
-        @on_transition.each { |m| obj.send(m, *args) }
+        options[:pass_transition] ?
+          @on_transition.each { |m| obj.send(m, self, *args) } :
+          @on_transition.each { |m| obj.send(m, *args) }
       when Proc
-        @on_transition.call(obj, *args)
+        options[:pass_transition] ?
+          @on_transition.call(obj, self, *args) :
+          @on_transition.call(obj, *args)
       end
     end
 
