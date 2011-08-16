@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.name        = "transitions"
   s.version     = Transitions::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Jakub Kuźma"]
+  s.authors     = ["Jakub Kuzma"]
   s.email       = "qoobaa@gmail.com"
   s.homepage    = "http://github.com/qoobaa/transitions"
   s.summary     = "State machine extracted from ActiveModel"
